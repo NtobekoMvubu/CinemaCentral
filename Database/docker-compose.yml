@@ -1,0 +1,31 @@
+version: '3.9'
+
+services:
+  postgres:
+    image: postgres:18
+    ports: 
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+  
+  flyway:
+    image: flyway/flyway
+    volumes:
+      - ./flyway:/flyway/sql
+    command: ["migrate"]
+    environment: 
+      FLYWAY_URL: jdbc:postgresql://${FLYWAY_URL}:5432/${POSTGRES_DB}
+      FLYWAY_USER: ${POSTGRES_USER}
+      FLYWAY_PASSWORD: ${POSTGRES_PASSWORD}
+      FLYWAY_CREATE_DATABASE: true
+      FLYWAY_PLACEHOLDER_REPLACEMENT: false
+      FLYWAY_BASELINE_ON_MIGRATE: true
+    depends_on: 
+      - postgres
+
+volumes:
+  postgres_data: 
