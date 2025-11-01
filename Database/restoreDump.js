@@ -1,4 +1,5 @@
 import dotenv from "dotenv";
+import query from "./db/db.js";
 dotenv.config();
 export async function restoreDump() {
   const options = {
@@ -10,7 +11,13 @@ export async function restoreDump() {
     },
   };
 
-   console.log(await fetchByLink(ApiLink.MovieList, options))
+   const movies = await fetchByLink(ApiLink.MovieList, options)
+   const genres = await fetchByLink(ApiLink.GenreList, options)
+
+   const res = await query(`
+      SELECT * FROM "flyway_schema_history"
+    `);
+    console.log(res);
 
 }
 
