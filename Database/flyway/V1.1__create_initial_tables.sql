@@ -30,7 +30,7 @@ CREATE TABLE "User" (
 );
 
 CREATE TABLE "Genre" (
-	"id" UUID UNIQUE PRIMARY KEY DEFAULT uuid_generate_v4(),
+	"id" INT UNIQUE PRIMARY KEY,
 	"title" VARCHAR,
 	"createdTimestamp" TIMESTAMP NOT NULL DEFAULT NOW(),
 	"modifiedTimestamp" TIMESTAMP NOT NULL DEFAULT NOW(),
@@ -49,6 +49,7 @@ CREATE TABLE "Comment" (
 
 CREATE TABLE "MovieGenre" (
 	"id" UUID UNIQUE PRIMARY KEY DEFAULT uuid_generate_v4(),
+	"GenreId" INT NOT NULL REFERENCES "Genre"("id"),
 	"movieId" UUID  NOT NULL REFERENCES "Movie"("id"),
 	"createdTimestamp" TIMESTAMP NOT NULL DEFAULT NOW(),
 	"modifiedTimestamp" TIMESTAMP NOT NULL DEFAULT NOW(),

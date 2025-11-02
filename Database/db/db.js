@@ -4,9 +4,9 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
+let pool = null;
 
-
-async function initDB(){
+async function createPool(){
     const {Pool} = pkg
 
     const __filename = fileURLToPath(import.meta.url);
@@ -21,7 +21,7 @@ async function initDB(){
     } else if (fs.existsSync(parentEnvPath)) {
     dotenv.config({ path: parentEnvPath });
     } else {
-    console.warn('.env file not found — using defaults');
+    console.warn('.env file not found using defaults');
     }
 
     const pool = new Pool({
@@ -32,11 +32,14 @@ async function initDB(){
         port: 5433
     });
 
-    return await pool.connect();
+    return await pool;
 }
 
 export default async function query(queryText, params){
-    const client = await initDB();;
+    if (!pool){
+        pool = await createPool();
+    }
+    const client = await pool.connect();
     let result;
     try{
         await client.query('BEGIN');        
