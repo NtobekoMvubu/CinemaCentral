@@ -15,11 +15,12 @@ export async function restoreDump() {
   const genres = await fetchByLink(ApiLink.GenreList, options)
 
   const insertGenreResult = await insertGenre(genres.genres)
-  const insertMovieResult = await insertMovie(movies.movies);
+  const insertMovieResult = await BulkInsertMovie(movies);
+  console.log(insertMovieResult)
   
 }
 
-async function fetchByLink(link ,options){
+async function fetchByLink(link, options){
   try {
     const response = await fetch(link, options)
     const data = await response.json();
@@ -34,7 +35,7 @@ async function insertGenre(genres){
   try {
     let res = [];
     for (const genre of genres){
-      if (genreExists(genre.id)){
+      if (await genreExists(genre.id)){
         console.log("Genre " + genre.name + " Exists")
         continue;
       }
@@ -84,52 +85,94 @@ async function fetchGenreById(id){
   }
 }
 
-async function insertMovie(){
+async function BulkInsertMovie(movies){
+  let res = [];
+  try {
+    for (const movie of movies.results){
+      const newMovie = createMovieObject(movie);
+      if (await movieExists(newMovie.title)){
+        console.log("Movie \"" + newMovie.title + "\" Exists")
+        continue;
+      }
+        const result = await insertMovie(newMovie);
+        res.push(result)
+    }
+    return res;
+  } catch (err) {
+    console.error("BulkInsertMovie... ", err)
+  }
+}
+
+async function fetchMovieByName(movieName){
   try {
     const res = await query(`
-      INSERT INTO "Movie" (
-        "title",
-        "originalTitle",
-        "overview",
-        "releaseDate",
-        "poster",
-        "votingAverage",
-        "adult",
-        "language"
-      ) VALUES (
-        $1,
-        $2,
-        $3,
-        $3,
-        $4,
-        $5,
-        $6,
-        $7,
-        $8
-      )
-      `)
-  } catch (error) {
-    
+      SELECT 
+        "title"
+      FROM "Movie" m 
+      WHERE m."title" =  $1
+    `, [movieName]);
+    return res;
+  } catch (err) {
+    console.error("fetchMovieByName... ", err)
   }
 }
 
 async function movieExists(movieName){
   try {
-    const res = await query(`
-      SELECT 
-        m."title"
-      FROM "Movie" m 
-      WHERE m.title =  $1
-    `[movieName]);
-    return res;
-  } catch (error) {
-    
+    const res = await fetchMovieByName(movieName);
+    if (res && res.rowCount >= 1){
+      return true;
+    }
+    return false;
+  } catch (err) {
+    console.error("movieExists... ", err)
   }
 }
 
+async function insertMovie(movie){
+  try{
+      const result = await query(`
+        INSERT INTO "Movie" (
+          "title",
+          "originalTitle",
+          "overview",
+          "releaseDate",
+          "poster",
+          "votingAverage",
+          "adult",
+          "language"
+        ) VALUES (
+          $1,
+          $2,
+          $3,
+          $4,
+          $5,
+          $6,
+          $7,
+          $8
+        )
+          RETURNING *
+        `, Object.values(movie));
+        return result;
+  }catch (err){
+    console.error("insertMovie... ", err)
+  }
+}
+
+const createMovieObject = (movie) => ({
+        "title": movie.title,
+        "originalTitle": movie.original_title,
+        "overview": movie.overview,
+        "releaseDate": movie.release_date,
+        "poster": movie.poster_path,
+        "votingAverage": movie.vote_average,
+        "adult": movie.adult,
+        "language": movie.original_language
+      });
+
 const ApiLink = {
   GenreList: 'https://api.themoviedb.org/3/genre/movie/list?language=en',
-  MovieList: 'https://api.themoviedb.org/3/movie/popular?language=en-US&page=1'
+  MovieList: 'https://api.themoviedb.org/3/movie/popular?language=en-US&page=3'
 }
 
 restoreDump();
