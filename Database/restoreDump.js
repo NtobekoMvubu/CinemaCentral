@@ -194,7 +194,7 @@ async function insertMovieGenre(genreId, movieId){
 
 const ApiLink = {
   GenreList: 'https://api.themoviedb.org/3/genre/movie/list?language=en',
-  MovieList: 'https://api.themoviedb.org/3/movie/popular?language=en-US&page=1'
+  MovieList: 'https://api.themoviedb.org/3/movie/popular?language=en-US&page=4'
 }
 
 restoreDump();
