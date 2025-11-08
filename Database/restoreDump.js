@@ -90,12 +90,16 @@ async function BulkInsertMovie(movies){
   try {
     for (const movie of movies.results){
       const newMovie = createMovieObject(movie);
+      const movieGenreIds = movie.genre_ids;
       if (await movieExists(newMovie.title)){
         console.log("Movie \"" + newMovie.title + "\" Exists")
         continue;
       }
-        const result = await insertMovie(newMovie);
-        res.push(result)
+        const movieInsertResult = await insertMovie(newMovie);
+        for (const genreId of movieGenreIds){
+          const movieGenreInsertResult = await insertMovieGenre(genreId, movieInsertResult.id)
+        }
+        res.push(movieInsertResult);
     }
     return res;
   } catch (err) {
@@ -153,7 +157,7 @@ async function insertMovie(movie){
         )
           RETURNING *
         `, Object.values(movie));
-        return result;
+        return result.rows[0];
   }catch (err){
     console.error("insertMovie... ", err)
   }
@@ -170,9 +174,27 @@ const createMovieObject = (movie) => ({
         "language": movie.original_language
       });
 
+async function insertMovieGenre(genreId, movieId){
+  try{
+    const res = await query(`
+      INSERT INTO  "MovieGenre" (
+        "GenreId",
+        "movieId"
+      ) VALUES (
+        $1,
+        $2
+      ) 
+      RETURNING *
+    `, [genreId, movieId]);
+    return res;
+  } catch (err){
+    console.error("insertMovieGenre... ", err);
+  }
+}
+
 const ApiLink = {
   GenreList: 'https://api.themoviedb.org/3/genre/movie/list?language=en',
-  MovieList: 'https://api.themoviedb.org/3/movie/popular?language=en-US&page=3'
+  MovieList: 'https://api.themoviedb.org/3/movie/popular?language=en-US&page=1'
 }
 
 restoreDump();
