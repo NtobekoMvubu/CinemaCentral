@@ -1,5 +1,5 @@
 import dotenv from "dotenv";
-import query from "./db/db.js";
+import query from "../Backend/Common/db/db.js"
 dotenv.config();
 export async function restoreDump() {
   const options = {
