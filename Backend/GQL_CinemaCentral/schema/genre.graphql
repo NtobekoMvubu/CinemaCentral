@@ -1,0 +1,21 @@
+type Genre {
+    id: Int!
+    title: String
+    createdTimestamp: Timestamp!
+    modifiedTimestamp: Timestamp!
+    active: Boolean
+}
+
+type GenreResponse {
+    ok: Boolean!
+    body: GenreResponseBody
+}
+
+type GenreResponseBody {
+    statusCode: Int!
+    genres: [Genre]
+}
+
+input GenreQueryParams {
+    id: Int!
+}
