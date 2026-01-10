@@ -1,0 +1,97 @@
+.top-main-bar{
+    position: fixed;
+    top: 0;
+    z-index: 100;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding-left: 1rem;
+    justify-items: stretch;
+}
+
+.top-main-bar section{
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+.main-title-section{
+    flex: 0.6;
+    font-size: 1.5rem;
+}
+
+.genre-section{
+    flex:1.2;
+}
+
+.search-section{
+    flex: 1;
+}
+
+.movie-search-input{
+    color: white;
+    border: 1px solid white;
+    width: 80%;
+    border-radius: 6rem;
+    border: transparent;
+    background-color: rgb(64, 63, 63);
+
+}
+
+.genre-list{
+    display: flex;
+    gap: 3rem;
+    list-style: none;
+    font-size: 1.5rem;
+    padding-right: 0;
+    
+}
+
+/* Remove the outline completely */
+.movie-search-input .MuiOutlinedInput-notchedOutline {
+  border: none;
+}
+
+/* Ensure hover does not bring it back */
+.movie-search-input:hover .MuiOutlinedInput-notchedOutline {
+  border: none;
+}
+
+/* Ensure focus does not bring it back */
+.movie-search-input.Mui-focused .MuiOutlinedInput-notchedOutline {
+  border: none;
+}
+
+/* Remove focus ring / glow */
+.movie-search-input.Mui-focused .MuiOutlinedInput-root {
+  box-shadow: none;
+}
+
+/* Remove browser outline */
+.movie-search-input .MuiOutlinedInput-root:focus-within {
+  outline: none;
+}
+
+/* Text color */
+.movie-search-input .MuiInputBase-input {
+  color: #fff;
+  font-size: 1rem;
+}
+
+/* Placeholder color */
+.movie-search-input .MuiInputBase-input::placeholder {
+  color: #aaa;
+  opacity: 1;
+}
+
+/* Label (if using label) */
+.movie-search-input .MuiInputLabel-root,
+.movie-search-input .MuiInputLabel-root.Mui-focused {
+  color: #aaa;
+}
+
+/* Search icon */
+.movie-search-input .MuiSvgIcon-root {
+  color: #aaa;
+}
