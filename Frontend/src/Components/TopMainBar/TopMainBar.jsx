@@ -10,21 +10,21 @@ function TopMainBar(){
     console.log("TopMainBar component rendered");
     return(
         <nav className='top-main-bar'>
-            <section className='main-title-section'>
-            <SvgIcon component={TheatersOutlinedIcon} fontSize='large' color='error'/>
-            <h2>CineCentral</h2>
+            <section className='title-genre-section'>
+                <div className="main-title-section">
+                    <SvgIcon component={TheatersOutlinedIcon} fontSize='large' color='error'/>
+                    <h2>CineCentral</h2>  
+                </div>
+                <section className='genre-section'>
+                    <ul className='genre-list'>
+                        <li className='genre-list-item'>Action</li>
+                        <li className='genre-list-item'>Comedy</li>
+                        <li className='genre-list-item'>Drama</li>
+                        <li className='genre-list-item'>Sci-Fi</li>
+                        <li className='genre-list-item'>Romance</li>
+                    </ul>
+                </section>
             </section>
-
-            <section className='genre-section'>
-            <ul className='genre-list'>
-                <li>Action</li>
-                <li>Comedy</li>
-                <li>Drama</li>
-                <li>Sci-Fi</li>
-                <li>Romance</li>
-            </ul>
-            </section>
-
             <section className='search-section'>
                 <Autocomplete 
                 className='movie-search-input' 
