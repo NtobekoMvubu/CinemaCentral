@@ -7,6 +7,7 @@ CREATE TABLE "Movie" (
 	"overview" TEXT,
 	"releaseDate" DATE NOT NULL,
 	"poster" VARCHAR NULL,
+	"backDrop" VARCHAR NULL,
 	"votingAverage" DECIMAL,
 	"adult" BOOL NOT NULL DEFAULT FALSE,
 	"language" VARCHAR NOT NULL,
