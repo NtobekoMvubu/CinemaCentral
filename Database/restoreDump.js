@@ -142,6 +142,7 @@ async function insertMovie(movie){
           "overview",
           "releaseDate",
           "poster",
+          "backDrop",
           "votingAverage",
           "adult",
           "language"
@@ -153,7 +154,8 @@ async function insertMovie(movie){
           $5,
           $6,
           $7,
-          $8
+          $8,
+          $9
         )
           RETURNING *
         `, Object.values(movie));
@@ -169,6 +171,7 @@ const createMovieObject = (movie) => ({
         "overview": movie.overview,
         "releaseDate": movie.release_date,
         "poster": movie.poster_path,
+        "backDrop": movie.backdrop_path,
         "votingAverage": movie.vote_average,
         "adult": movie.adult,
         "language": movie.original_language
@@ -194,7 +197,7 @@ async function insertMovieGenre(genreId, movieId){
 
 const ApiLink = {
   GenreList: 'https://api.themoviedb.org/3/genre/movie/list?language=en',
-  MovieList: 'https://api.themoviedb.org/3/movie/popular?language=en-US&page=4'
+  MovieList: 'https://api.themoviedb.org/3/movie/popular?language=en-US&page=5'
 }
 
 restoreDump();

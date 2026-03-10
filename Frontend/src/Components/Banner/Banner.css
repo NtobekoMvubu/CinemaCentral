@@ -1,0 +1,150 @@
+
+.overlay{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4); /* dark overlay */
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items:flex-start;
+}
+
+.carousel-wrapper{
+    position: relative;
+    margin: 10px;
+    width: 100vw;
+    margin-top: 116px;
+    height: 1000px;
+}
+
+.carousel-wrapper img {
+    width: 100%;
+    display: block;
+}
+
+.carousel-poster{
+    width: 100vw;
+    height: 1000px;
+    object-fit:fill;
+    display: flex;
+}
+
+.carousel-movie-details{
+    display: flex;
+    flex-direction: column;
+    margin-left: 5rem;
+    width: 1200px;
+    justify-content: center;
+}
+
+.carousel-movie-title{
+    margin: 0px;
+    font-weight: 400;
+    font-size: 78px;
+}
+
+.carousel-movie-stats{
+    margin: 0px;
+    font-size: 30px;
+    font-weight: 300;
+}
+
+.carousel-movie-overview{
+    font-size: 28px;
+}
+
+.watch-trailer-button{
+    font-size: larger;
+}
+
+.carousel-movie-buttons{
+    display: flex;
+    flex-direction: row;
+    gap: 0.8rem;
+}
+
+.carousel-animated-movie-indicator{
+    margin-top: 60px;
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    width: 100%;
+    justify-content: center;
+}
+
+.dot{
+
+    width: 15px;
+    height: 15px;
+    border-radius: 99px;
+    background-color: white;
+    transition: all 0.3 ease;
+}
+
+.dot-active{
+    height: 15px;
+    width: 60px;
+    border-radius: 50px;
+    background-color: grey;
+}
+
+.carousel-movie-row{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 750px;
+}
+
+.carousel-movie-prev{
+    margin-left: 5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 3rem;
+}
+
+.carousel-movie-next{
+    margin-left: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 3rem;
+    margin-right: 5rem;
+}
+
+.movie-action-prev{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.377);
+    border-radius: 50%;
+    width: 4.5rem;
+    height: 4.5rem;
+}
+
+.movie-action-next{
+    margin-left: auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.377);
+    border-radius: 50%;
+    width: 4.5rem;
+    height: 4.5rem;
+}
+
+.movie-action-prev:hover{
+    cursor: pointer;
+    transform: scale(0.8);
+}
+
+.movie-action-next:hover{
+    cursor: pointer;
+    transform: scale(0.8);
+}

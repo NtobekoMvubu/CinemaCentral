@@ -5,6 +5,7 @@ type Movie{
     overview: String
     releaseDate: Date!
     poster: String
+    backDrop: String
     votingAverage: Float
     adult: Boolean
     language: String!
