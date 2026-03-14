@@ -9,33 +9,47 @@ function Banner (){
     const [movies, setMovies] = useState([]);
     const tmdbLink = "https://image.tmdb.org/t/p/original";
     let {data, loading, error} = useLatestMovies();
-    let currentMovieIndex = 0;
+    const [currentMovieIndex, setCurrentMovieIndex] = useState(0);
     
     useEffect(() => {
+        console.log("loading is " + loading);
+        console.log("data is" + data );
         if (!loading && !error && data){
             setMovies(data.movieQuery.body.movies);
         }
     }, [loading, error, data])
 
     useEffect (() => {
-        setInterval(() => {
-            if (movies.length === 0){
-                return
-            }
-            if (currentMovieIndex > movies.length -1) {
-                currentMovieIndex = 0;
-            }
-            setCurrentMovie(movies[currentMovieIndex])
-            currentMovieIndex++
-        }, 15000);
+        slideshow()
+        const interval = setInterval(slideshow , 7000);
+        return () => clearInterval(interval);
     }, [movies])
 
+    function slideshow(){
+        if (movies.length === 0){
+            return;
+        }
+        setCurrentMovieIndex(prev => {
+            const next = (prev + 1) % movies.length;
+            setCurrentMovie(movies[next]);
+            return next;
+        });
+    }
+
     function handleMoviePrev() {
-        currentMovieIndex --;
+        setCurrentMovieIndex(i => {
+            const prev = (i - 1 + movies.length) % movies.length;
+            setCurrentMovie(movies[prev]);
+            return prev;
+        });
     }
 
     function handleMovieNext() {
-        currentMovieIndex--;
+        setCurrentMovieIndex(i => {
+            const next = (i + 1) % movies.length;
+            setCurrentMovie(movies[next]);
+            return next;
+        });
     }
 
     return (
@@ -70,7 +84,7 @@ function Banner (){
                         <div className='carousel-animated-movie-indicator'>
                             {movies.map((movie, idx) => (
                                 //need to use RecoilState so i can update the whole section 
-                                <div key={idx} className={`dot${3 === idx ? '-active': ''}`}></div>
+                                <div key={idx} className={`dot${currentMovieIndex === idx ? '-active': ''}`}></div>
                             ))}
                         </div>
                     </div>
