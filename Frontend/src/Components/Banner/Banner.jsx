@@ -12,8 +12,6 @@ function Banner (){
     const [currentMovieIndex, setCurrentMovieIndex] = useState(0);
     
     useEffect(() => {
-        console.log("loading is " + loading);
-        console.log("data is" + data );
         if (!loading && !error && data){
             setMovies(data.movieQuery.body.movies);
         }
@@ -69,7 +67,7 @@ function Banner (){
                             </div>
                             <div className='carousel-movie-details'>
                                 <h1  className='carousel-movie-title'>{currentMovie?.title} </h1>
-                                <h3 className='carousel-movie-stats'>{`${new Date(currentMovie?.releaseDate).getFullYear()} • ${currentMovie?.language} • ${currentMovie?.votingAverage || 'Coming soon...'}`}</h3>
+                                <h3 className='carousel-movie-stats'>{`${new Date(currentMovie?.releaseDate).getFullYear()} • ${currentMovie?.language} • ${ "⭐" + currentMovie?.votingAverage || 'Coming soon...'}`}</h3>
                                 <p className='carousel-movie-overview'>{currentMovie?.overview}</p>
                                 <div className='carousel-movie-buttons'>
                                     <Button className='watch-trailer-button' startIcon={<PlayArrowOutlinedIcon/>} variant='contained' color='error' size='large' sx={{fontSize:"1.5rem", borderRadius:"0.8rem", "& .MuiSvgIcon-root": {fontSize: "32px",}}}  >Play Trailer</Button>

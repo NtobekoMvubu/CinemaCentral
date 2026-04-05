@@ -7,7 +7,6 @@ import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
 function TopMainBar(){
 
-    console.log("TopMainBar component rendered");
     return(
         <nav className='top-main-bar'>
             <section className='title-genre-section'>
