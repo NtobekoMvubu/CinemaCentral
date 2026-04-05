@@ -2,4 +2,5 @@ type Query{
     movieQuery: MovieResponse
     genreQuery: GenreResponse
     genreFilterId(params: GenreQueryParams!): GenreResponse
+    movieGenreQuery(params: MovieGenreQueryParams): MovieGenreResponse
 }

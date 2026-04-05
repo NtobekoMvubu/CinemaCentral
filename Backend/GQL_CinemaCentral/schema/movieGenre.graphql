@@ -1,0 +1,24 @@
+type MovieGenre {
+    id: ID!
+    GenreId: Int!
+    movieId: ID!
+    createdTimestamp: Timestamp!
+    modifiedTimestamp: Timestamp!
+    active: Boolean
+    movie: Movie
+    genre: Genre
+}
+
+type MovieGenreResponse {
+    ok: Boolean!
+    body: MovieGenreResponseBody
+}
+
+type MovieGenreResponseBody { 
+    statusCode: Int!
+    movieGenre: [MovieGenre]
+}
+
+input MovieGenreQueryParams {
+    title: String!
+}

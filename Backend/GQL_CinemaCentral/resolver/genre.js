@@ -3,7 +3,7 @@ export default {
     Query: {
         genreQuery: async () => {
             const res = await query(`
-                select * from "Genre"
+                select g."title" from "Genre" g
             `);
             return {
                 ok: true,
