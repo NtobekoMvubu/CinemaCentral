@@ -1,4 +1,5 @@
 .movieCard-container{
+    display: inline-block;
     position: relative;
     width: 380px;
     height: 620px;
@@ -33,4 +34,10 @@
 
 .movie-details p {
     font-size: 20px;
+}
+
+.movie-modal{
+    position: absolute;
+    top: 50%;
+    width: 500px;
 }

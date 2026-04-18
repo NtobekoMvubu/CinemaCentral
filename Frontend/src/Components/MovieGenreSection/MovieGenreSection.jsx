@@ -14,7 +14,7 @@ function MovieGenreSection({genre}) {
     };
     let {data, loading, error} = useMovieGenre(queryParams); 
     useEffect(() => {
-        console.log(data?.movieGenreQuery.body.movieGenre.movie);
+        console.log(data?.movieGenreQuery.body.movieGenre);
         setMovieGenres(data?.movieGenreQuery.body.movieGenre)
     }, [data, loading, error]);
     return (
