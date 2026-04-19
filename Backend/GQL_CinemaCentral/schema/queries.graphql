@@ -3,4 +3,5 @@ type Query{
     genreQuery: GenreResponse
     genreFilterId(params: GenreQueryParams!): GenreResponse
     movieGenreQuery(params: MovieGenreQueryParams): MovieGenreResponse
+    allMoviesQuery: MovieResponse
 }

@@ -17,3 +17,17 @@ export const uselatestMovies = gql`
         }
     }
 `;
+
+export const allMovies = gql`
+    query AllMoviesQuery {
+        allMoviesQuery {
+            body {
+                movies {
+                    title
+                    releaseDate
+                    poster
+                }
+            }
+        }
+    }
+`;
