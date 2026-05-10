@@ -6,43 +6,54 @@
     display: flex;
     flex-direction: column;
     z-index: 1000;
-    width: 600px;
-    height: auto;
+    width: 450px;
+    height: 500px;
     pointer-events: none;
-    background-color: black;
+    background-color: rgb(24, 24, 24);
     border-radius: 30px;
 }
 
 .tooltip-container.show{
     opacity: 1;
-    transform: translate(-50%, -60%) scale(1);
+    transform: translate(-50%, -55%) scale(1);
 }
 
 .movie-backDrop{
     border-top-left-radius: 30px;
     border-top-right-radius: 30px;
-    height: 350px;
+    height: 300px;
 }
 
 .tooltip-button-container{
     padding: 14px;
     display: flex;
     gap: 10px;
+    justify-content: flex-end;
 }
 
 .tooltip-header{
-    font-size: 40px;
+    flex: 2;
+    font-size: 28px;
+    font-family:Arial, Helvetica, sans-serif;
     margin: 0px;
     padding-left: 14px;
 }
 
 .tooltip-movie-description{
     padding: 14px;
-    font-size: 24px;
+    font-size: 20px;
     font-family:Arial, Helvetica, sans-serif;
     font-weight: lighter;
     display: -webkit-box;
-    -webkit-line-clamp: 2;      /* number of lines */
+    -webkit-line-clamp: 3;      /* number of lines */
     -webkit-box-orient: vertical;
     overflow: hidden;
+    color: grey;
+}
+
+.movie-title-actions{
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+
 }
