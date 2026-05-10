@@ -18,6 +18,7 @@ export const MovieGenre = gql`
                         poster
                         votingAverage
                         releaseDate
+                        backDrop
                     }
                     genre {
                         id
