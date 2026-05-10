@@ -15,6 +15,19 @@ export default {
                     movies: res.rows
                 }
             };
+        },
+        allMoviesQuery: async () => {
+            const res = await query(`
+                SELECT * 
+                FROM "Movie" m
+            `);
+            return {
+                ok: true,
+                body: {
+                    statusCode: 200,
+                    movies: res.rows
+                }
+            }
         }
     }
 }
