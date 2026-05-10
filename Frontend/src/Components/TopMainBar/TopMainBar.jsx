@@ -5,7 +5,20 @@ import './TopMainBar.css'
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
+import { useAllMovies } from '../../hooks/useAllMovies';
+import { useEffect, useState } from 'react';
 function TopMainBar(){
+    const [movies, setMovies] = useState()
+    const {data, error, loading} = useAllMovies();
+    const tmdbLink = "https://image.tmdb.org/t/p/original";
+
+
+    useEffect(() => {
+        if (data && !error && !loading){
+            console.log(data?.allMoviesQuery?.body.movies);
+            setMovies(data?.allMoviesQuery?.body.movies);
+        }
+    }, [data, loading, error]);
 
     return(
         <nav className='top-main-bar'>
@@ -27,7 +40,8 @@ function TopMainBar(){
             <section className='search-section'>
                 <Autocomplete 
                 className='movie-search-input' 
-                options={['The Chosen']}
+                options={movies}
+                getOptionLabel={(option)=> option.title}
                 renderInput={(params)=> 
                 <TextField {...params}
                     placeholder="Search movies..."  
@@ -39,6 +53,17 @@ function TopMainBar(){
                     }}
                     /> 
                 }
+                renderOption={(props, option)=> (
+                    <li {...props}>
+                        <section className='option-container'>
+                            <img className='option-image'  src={`${tmdbLink}${option?.poster}`} alt={option?.title}/>
+                            <div className='option-info'>
+                                <h2 className='option-title'>{option?.title}</h2>
+                                <h4 className='option-year'>{new Date(option?.releaseDate).getFullYear()}</h4>
+                            </div>
+                        </section>
+                    </li>
+                )}
                 />
             </section>
         </nav>
